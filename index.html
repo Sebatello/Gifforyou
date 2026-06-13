@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kupon z Prostownicą 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .message {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .coupon {
+            position: relative;
+            width: 350px;
+            height: 200px;
+            margin: 30px auto;
+            border: 3px dashed #ff6b6b;
+            background: #fff;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .surprise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            z-index: 1;
+        }
+        
+        .hair-iron {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+        
+        .surprise-text {
+            color: #d63031;
+            font-size: 26px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .surprise-subtext {
+            color: #e17055;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .scratch-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 3;
+        }
+        
+        .scratch-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hearts {
+            color: #ff6b6b;
+            font-size: 30px;
+            margin-top: 20px;
+        }
+        
+        .click-instruction {
+            color: #888;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💕 Dla Mojej Ulubionej 💕</h1>
+        <p class="message">Zadrapaj kupon, aby zobaczyć swoją niespodziankę!</p>
+        
+        <div class="coupon" id="coupon">
+            <div class="surprise">
+                <div class="hair-iron">🔥</div>
+                <div class="surprise-text">PROSTOWNICA!</div>
+                <div class="surprise-subtext">Kupię Ci nową prostownicę 💕</div>
+            </div>
+            <div class="scratch-area" id="scratchArea">
+                <div class="scratch-text">ZADRAPAĆ TUTAJ</div>
+            </div>
+        </div>
+        
+        <p class="click-instruction">Kliknij i przesuń po kuponie, aby go zadrapać</p>
+        <div class="hearts">❤️❤️❤️</div>
+    </div>
+
+    <script>
+        const scratchArea = document.getElementById('scratchArea');
+        const coupon = document.getElementById('coupon');
+        let isDrawing = false;
+        
+        // Create canvas for scratch effect
+        const canvas = document.createElement('canvas');
+        canvas.width = 350;
+        canvas.height = 200;
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.zIndex = '3';
+        canvas.style.cursor = 'pointer';
+        
+        const ctx = canvas.getContext('2d');
+        
+        // Fill canvas with scratch color
+        ctx.fillStyle = '#ff9a9e';
+        ctx.fillRect(0, 0, 350, 200);
+        
+        // Add gradient effect
+        const gradient = ctx.createLinearGradient(0, 0, 350, 200);
+        gradient.addColorStop(0, '#ff9a9e');
+        gradient.addColorStop(1, '#fecfef');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 350, 200);
+        
+        // Add text
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 24px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(0,0,0,0.3)';
+        ctx.shadowBlur = 4;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.fillText('ZADRAPAĆ TUTAJ', 175, 100);
+        
+        coupon.appendChild(canvas);
+        
+        // Scratch function
+        function scratch(x, y) {
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 25, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Event listeners
+        scratchArea.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            const x = e.offsetX;
+            const y = e.offsetY;
+            scratch(x, y);
+        });
+        
+        scratchArea.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            const x = e.offsetX;
+            const y = e.offsetY;
+            scratch(x, y);
+        });
+        
+        scratchArea.addEventListener('mouseup', () => {
+            isDrawing = false;
+        });
+        
+        scratchArea.addEventListener('mouseleave', () => {
+            isDrawing = false;
+        });
+        
+        // Touch support for mobile
+        scratchArea.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDrawing = true;
+            const touch = e.touches[0];
+            const element = touch.target;
+            const rect = element.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            scratch(x, y);
+        });
+        
+        scratchArea.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (!isDrawing) return;
+            const touch = e.touches[0];
+            const element = touch.target;
+            const rect = element.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            scratch(x, y);
+        });
+        
+        scratchArea.addEventListener('touchend', () => {
+            isDrawing = false;
+        });
+    </script>
+</body>
+</html>
