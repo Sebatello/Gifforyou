@@ -1,269 +1,125 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kupon dla Alinki 💕</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow: hidden;
-        }
-        
-        .container {
-            text-align: center;
-            background: white;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            max-width: 90%;
-            width: 90%;
-        }
-        
-        h1 {
-            color: #ff6b6b;
-            margin-bottom: 20px;
-            font-size: 32px;
-            font-weight: bold;
-        }
-        
-        .coupon {
-            position: relative;
-            width: 100%;
-            max-width: 320px;
-            height: 220px;
-            margin: 20px auto;
-            border: 4px dashed #ff6b6b;
-            background: #fff;
-            overflow: hidden;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-        
-        .surprise {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-            z-index: 1;
-            padding: 20px;
-        }
-        
-        .hair-iron {
-            font-size: 90px;
-            margin-bottom: 15px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .surprise-text {
-            color: #d63031;
-            font-size: 30px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .surprise-subtext {
-            color: #e17055;
-            font-size: 18px;
-            text-align: center;
-            line-height: 1.4;
-        }
-        
-        .cover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #ff9a9e 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 2;
-            border-radius: 6px;
-            transition: opacity 0.3s ease;
-        }
-        
-        .cover-text {
-            color: white;
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            padding: 20px;
-        }
-        
-        .tap-icon {
-            font-size: 40px;
-            margin-top: 10px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-        }
-        
-        .hearts {
-            color: #ff6b6b;
-            font-size: 35px;
-            margin-top: 25px;
-            animation: heartbeat 1.5s infinite;
-        }
-        
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-        }
-        
-        .instruction {
-            color: #888;
-            font-size: 16px;
-            margin-top: 15px;
-            font-weight: 500;
-        }
-        
-        .reveal-animation {
-            animation: reveal 0.5s ease-out;
-        }
-        
-        @keyframes reveal {
-            0% { transform: scale(1); opacity: 0; }
-            100% { transform: scale(1.1); opacity: 1; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kupon-niespodzianka</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f9d976, #f39f86);
+      font-family: Arial, sans-serif;
+    }
+
+    .wrap {
+      perspective: 1200px;
+    }
+
+    .coupon {
+      width: 360px;
+      height: 220px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease;
+      cursor: pointer;
+    }
+
+    .coupon.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .side {
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    }
+
+    .front {
+      background: linear-gradient(135deg, #ffffff, #ffe6a7);
+      border: 3px dashed #c89b2c;
+      color: #6b4e00;
+    }
+
+    .back {
+      background: linear-gradient(135deg, #2b5876, #4e4376);
+      color: #fff;
+      transform: rotateY(180deg);
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+    .reward {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    .hint {
+      margin-top: 16px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .stamp {
+      margin-top: 14px;
+      border: 2px solid rgba(255,255,255,0.7);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Kupon dla mojej Alinki 💕</h1>
-        
-        <div class="coupon" id="coupon">
-            <div class="surprise" id="surprise">
-                <div class="hair-iron">🔥</div>
-                <div class="surprise-text">PROSTOWNICA!</div>
-                <div class="surprise-subtext">Kupię Ci nową prostownicę<br>💕 Dla mojej ulubionej 💕</div>
-            </div>
-            <div class="cover" id="cover">
-                <div class="cover-text">
-                    KLIKNIJ, ABY ODKRYĆ
-                    <div class="tap-icon">👆</div>
-                </div>
-            </div>
-        </div>
-        
-        <p class="instruction">Kliknij na kupon, aby zobaczyć niespodziankę!</p>
-        <div class="hearts">❤️❤️❤️</div>
-    </div>
+  <div class="wrap">
+    <div class="coupon" id="coupon">
+      <div class="side front">
+        <div class="title">Kupon-niespodzianka</div>
+        <div class="subtitle">Kliknij w kupon, żeby odkryć swoją nagrodę.</div>
+        <div class="hint">Czeka coś wyjątkowego ✨</div>
+      </div>
 
-    <script>
-        const coupon = document.getElementById('coupon');
-        const cover = document.getElementById('cover');
-        const surprise = document.getElementById('surprise');
-        let isRevealed = false;
-        
-        coupon.addEventListener('click', function() {
-            if (isRevealed) return;
-            
-            isRevealed = true;
-            
-            // Hide cover
-            cover.style.opacity = '0';
-            cover.style.pointerEvents = 'none';
-            
-            // Show surprise with animation
-            surprise.classList.add('reveal-animation');
-            
-            // Add confetti effect
-            createConfetti();
-        });
-        
-        // Confetti effect
-        function createConfetti() {
-            const colors = ['#ff6b6b', '#ff9a9e', '#fecfef', '#ffeaa7', '#fdcb6e'];
-            
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.top = '50%';
-                confetti.style.zIndex = '1000';
-                confetti.style.borderRadius = '50%';
-                confetti.style.pointerEvents = 'none';
-                
-                document.body.appendChild(confetti);
-                
-                const angle = Math.random() * Math.PI * 2;
-                const velocity = 5 + Math.random() * 10;
-                let x = 0;
-                let y = 0;
-                let vx = Math.cos(angle) * velocity;
-                let vy = Math.sin(angle) * velocity - 10;
-                
-                animateConfetti(confetti, vx, vy);
-            }
-        }
-        
-        function animateConfetti(confetti, vx, vy) {
-            let opacity = 1;
-            
-            function update() {
-                vx *= 0.98;
-                vy *= 0.98;
-                vy += 0.5;
-                x += vx;
-                y += vy;
-                opacity -= 0.02;
-                
-                confetti.style.left = (parseFloat(confetti.style.left) + vx * 2) + '%';
-                confetti.style.top = (50 + y / 10) + '%';
-                confetti.style.opacity = opacity;
-                
-                if (opacity > 0) {
-                    requestAnimationFrame(update);
-                } else {
-                    confetti.remove();
-                }
-            }
-            
-            requestAnimationFrame(update);
-        }
-        
-        // Prevent double-tap zoom on mobile
-        coupon.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            if (!isRevealed) {
-                coupon.click();
-            }
-        }, { passive: false });
-    </script>
+      <div class="side back">
+        <div class="title">Twoja nagroda</div>
+        <div class="reward">Bon na wspólnie spędzony dzień</div>
+        <div class="subtitle">Tak jak masz ochotę — bez planu, bez pośpiechu, po prostu razem.</div>
+        <div class="stamp">do zrealizowania w dowolnym terminie</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const coupon = document.getElementById('coupon');
+    coupon.addEventListener('click', () => {
+      coupon.classList.toggle('flipped');
+    });
+  </script>
 </body>
 </html>
